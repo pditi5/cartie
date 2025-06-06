@@ -1,11 +1,15 @@
 import cohere
 import os
-from dotenv import load_dotenv
 import re
 import streamlit as st
 
 # Load environment variables (for local development)
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv not available (e.g., in Streamlit Cloud)
+    pass
 
 # Get API key from environment or Streamlit secrets
 try:
