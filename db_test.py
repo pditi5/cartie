@@ -1,11 +1,16 @@
 import mysql.connector
 import streamlit as st
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+# Load environment variables (for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv not available (e.g., in Streamlit Cloud)
+    pass
 
-# Database configuration 
+# Database configuration - Try to get from Streamlit secrets first, then environment
 try:
     DB_CONFIG = {
         "host": st.secrets["DB_HOST"],
