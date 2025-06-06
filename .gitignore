@@ -1,8 +1,4 @@
 .env
+.streamlit/secrets.toml
 __pycache__/
 *.pyc
-*.sqlite3
-*.log
-.DS_Store
-.vscode/
-.idea/

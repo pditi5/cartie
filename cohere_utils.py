@@ -2,14 +2,22 @@ import cohere
 import os
 from dotenv import load_dotenv
 import re
+import streamlit as st
 
+# Load environment variables (for local development)
 load_dotenv()
 
-# loading the api key from .env file
-COHERE_API_KEY = os.getenv("COHERE_API_KEY")
-print("API KEY from env:", os.getenv("COHERE_API_KEY"))
+# Get API key from environment or Streamlit secrets
+try:
+    COHERE_API_KEY = st.secrets["COHERE_API_KEY"]
+except:
+    COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+
+if not COHERE_API_KEY:
+    raise ValueError("COHERE_API_KEY is not set! Please check your environment variables or Streamlit secrets.")
 
 co = cohere.ClientV2(COHERE_API_KEY)
+
 
 def clean_sql(sql_code):
     """
